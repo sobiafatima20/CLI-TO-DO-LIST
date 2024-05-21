@@ -11,7 +11,7 @@ let todoList = await inquirer.prompt([
     {
         name: "list",
         type: "confirm",
-        message: "Do you want to?",
+        message: chalk.green("Do you want to?"),
        
     }
 ]);
@@ -37,13 +37,13 @@ if(todoList.list){
                 {
                     name: "task",
                     type: "input",
-                    message: "What you want add in your Todos list?",
+                    message: chalk.green("What you want add in your Todos list?"),
                 },
         
                 {
                     name: "addMore",
                     type: "confirm",
-                    message: "Do you want to add more",
+                    message: chalk.green("Do you want to add more"),
                     default: "false",
                 }
             
@@ -52,7 +52,7 @@ if(todoList.list){
         );
         todos.push(addTask.task);
         condition = perform.Task
-        console.log(todos); 
+        console.log(chalk.greenBright(todos)); 
     }
 
     //Delete the list of todolist
@@ -63,21 +63,21 @@ if(todoList.list){
                 {
                     name: "delete",
                     type: "number",
-                    message: "Enter the index of the task you want to delete:",
+                    message: chalk.green("Enter the index of the task you want to delete:"),
                 },
                 {
                     name: "deleteMore",
                     type: "confirm",
-                    message: "Do you want to delete more?",
+                    message: chalk.green("Do you want to delete more?"),
                     default: false,
                 }
             ]);
             if (deleteTask.delete >= 0 && deleteTask.delete < todos.length) {
                 todos.splice(deleteTask.delete, 1);
             } else {
-                console.log("Invalid index");
+                console.log(chalk.red("Invalid index"));
             }
-            console.log(todos);
+            console.log(chalk.greenBright(todos));
         } while (deleteTask.deleteMore);
     }
 
@@ -90,40 +90,40 @@ if(todoList.list){
                 {
                     name: "index",
                     type: "number",
-                    message: "Enter the index of the task you want to update:",
+                    message: chalk.green("Enter the index of the task you want to update:"),
                 },
                 {
                     name: "newTask",
                     type: "input",
-                    message: "Enter the new task:",
+                    message: chalk.green("Enter the new task:"),
                 },
                 {
                     name: "updateMore",
                     type: "confirm",
-                    message: "Do you want to update more?",
+                    message: chalk.green("Do you want to update more?"),
                     default: false,
                 }
             ]);
             if (updateTask.index >= 0 && updateTask.index < todos.length) {
                 todos[updateTask.index] = updateTask.newTask;
             } else {
-                console.log("Invalid index");
+                console.log(chalk.red("Invalid index"));
             }
-            console.log(todos);
+            console.log(chalk.greenBright(todos));
         } while (updateTask.updateMore);
     }
 
     //View the list of todolist
     else if (perform.Task === "View") {
-        console.log("Your todo list:");
+        console.log(chalk.greenBright("Your todo list:"));
         todos.forEach((task, index) => {
-            console.log(`${index}: ${task}`);
+            console.log(chalk.blue(`${index}: ${task}`));
         });
     }
 
     //Exit the list of todolist
     else if(perform.Task === "Exit"){
-        console.log("Thanks to use this todo list!");
+        console.log(chalk.green("Thanks to use this todo list!"));
         condition = false;
         
     }
